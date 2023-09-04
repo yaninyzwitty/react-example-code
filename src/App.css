@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.toggle-blue {
+  padding: 10px;
+  background-color: blue;
+  color: white;
+}
+
+.toggle-yellow {
+  padding: 20px;
+  color: black;
+  background-color: yellow;
+}

@@ -1,40 +1,33 @@
-import React, {useState} from "react";
-import AddTask from "./AddTask";
-import TaskList from "./TaskList";
-type Task = {
-  id: number;
-  text: string;
-  done: boolean;
-};
+import {decrement, increment, incrementByAmount} from "./slices/counterSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 function App() {
-  const initialTasks = [
-    {id: 0, text: "Visit Kafka Museum", done: true},
-    {id: 1, text: "Watch a puppet show", done: false},
-    {id: 2, text: "Lennon Wall pic", done: false},
-  ];
-  const [tasks, setTasks] = useState(initialTasks);
-  const handleAddTask = (task: string) => {
-    setTasks([...tasks, {id: tasks.length, text: task, done: false}]);
-  };
-  function handleChangeTask(updatedTask: Task) {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-    );
-  }
-  function handleDeleteTask(taskId: number) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-  }
+  const dispatch = useDispatch();
+
+  const count = useSelector((state: any) => state.counter.count);
+
   return (
-    <>
-      <h1>Prague itinerary</h1>
-      <AddTask onAddTask={handleAddTask} />
-      <TaskList
-        tasks={tasks}
-        onChangeTask={handleChangeTask}
-        onDeleteTask={handleDeleteTask}
-      />
-    </>
+    <div className="flex flex-col items-center justify-center min-h-screen space-y-3 m-5">
+      <h3 className="text-2xl font-bold">{count}</h3>
+      <button
+        className="w-full px-6 py-5 bg-green-500 text-white rounded-lg"
+        onClick={() => dispatch(increment())}
+      >
+        Add
+      </button>
+      <button
+        className="w-full px-6 py-5 bg-red-500 text-white rounded-lg"
+        onClick={() => dispatch(decrement())}
+      >
+        Minus
+      </button>
+      <button
+        className="w-full px-6 py-5 bg-green-500 text-white rounded-lg"
+        onClick={() => dispatch(incrementByAmount(5))}
+      >
+        AddByAmount
+      </button>
+    </div>
   );
 }
 

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.button_disabled {
+    opacity: 50% !important;
+    background-color: gray !important;
+    text-align: center;
+    color: white;
+    cursor: not-allowed;
+
+}
+
+.button {
+    padding: 10px;
+    background-color: green;
+    color: white;
+
+}
